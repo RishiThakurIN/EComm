@@ -1,12 +1,9 @@
-import { Typography } from '@mui/material'
-import React from 'react'
+import { Typography } from "@mui/material";
 
-function ContactPage() {
-  return (
-    <Typography variant='h2'>
-        ContactPage
-    </Typography>
-  )
+export default function ContactPage() {
+    return (
+        <Typography variant='h2'>
+            Contact page
+        </Typography>
+    )
 }
-
-export default ContactPage

@@ -1,24 +1,25 @@
-import React from 'react';
 import { useState, useEffect } from "react";
-import { Product } from "../../app/models/Product"
+import agent from "../../app/api/agent";
+import LoadingComponent from "../../app/layout/LoadingComponent";
+import { Product } from "../../app/models/product";
 import ProductList from "./ProductList";
 
-function Catalog() {
+export default function Catalog() {
+    const [products, setProducts] = useState<Product[]>([]);
+    const [loading,setLoading]= useState(true);
 
-  const [products, setProducts] = useState<Product[]>([]);
+    useEffect(() => {        
+        agent.Catalog.list()
+        .then(products=>setProducts(products))
+        .catch(error=>console.log(error))
+        .finally(()=>setLoading(false));
+    }, [])
 
-  useEffect(() => {
-    fetch("http://localhost:5000/api/Products")
-      .then(resp => resp.json())
-      .then(product => setProducts(product));
-  }, []);
+    if(loading) return <LoadingComponent message="Loading products..."/>
 
-  return (
-    <>
-      <ProductList products={products} />
-    </>
-
-  )
+    return (
+        <>
+            <ProductList products={products} />
+        </>
+    )
 }
-
-export default Catalog

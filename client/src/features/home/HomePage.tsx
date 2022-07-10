@@ -1,10 +1,9 @@
-import { Typography } from '@mui/material'
-import React from 'react'
+import { Typography } from "@mui/material";
 
-function HomePage() {
-  return (
-    <Typography variant='h2'>HomePage</Typography>
-  )
+export default function HomePage() {
+    return (
+        <Typography variant='h2'>
+            Home page
+        </Typography>
+    )
 }
-
-export default HomePage
