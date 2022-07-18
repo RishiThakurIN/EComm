@@ -4,7 +4,9 @@ import { history } from "../..";
 
 const sleep=()=>new Promise(resolve=>setTimeout(resolve,400));
 
+axios.defaults.withCredentials=true;
 axios.defaults.baseURL = "http://localhost:5000/api/";
+
 
 axios.interceptors.response.use(async response => {
     await sleep();
@@ -62,9 +64,16 @@ const TestErrors = {
     getValidationError: () => request.get('buggy/validation-error')
 }
 
+const Basket={
+    getBasket:()=>request.get('basket'),
+    addItem:(productId:number,quantity=1)=>request.post(`basket?productid=${productId}&quantity=${quantity}`,{}),
+    removeItem:(productId:number,quantity=1)=>request.delete(`basket?productid=${productId}&Quantity=${quantity}`)
+}
+
 const agent = {
     Catalog,
-    TestErrors
+    TestErrors,
+    Basket
 }
 
 export default agent;

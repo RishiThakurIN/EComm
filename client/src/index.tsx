@@ -5,6 +5,7 @@ import App from './app/layout/App';
 import reportWebVitals from './reportWebVitals';
 import { Router } from 'react-router-dom';
 import { createBrowserHistory } from "history";
+import { StoreProvider } from './app/context/StoreContext';
 
 /*
 As agent.ts file is not a react component but we need to perform redirection from there.
@@ -15,7 +16,9 @@ export const history = createBrowserHistory(); //used in agent.ts file to push l
 ReactDOM.render(
   <React.StrictMode>
     <Router history={history}>
-      <App />
+      <StoreProvider>
+        <App />
+      </StoreProvider>
     </Router>
   </React.StrictMode>,
   document.getElementById('root')
